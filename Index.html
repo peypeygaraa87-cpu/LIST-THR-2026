@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>List Pembagian THR 2026</title>
+
+<!-- jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#eef2f5;
+}
+.box{
+  max-width:400px;
+  margin:40px auto;
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
+h2{text-align:center;margin-bottom:5px;}
+p{text-align:center;color:#555;}
+label{display:block;margin-top:15px;}
+input,select,button{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+}
+button{
+  background:#1a73e8;
+  color:#fff;
+  border:none;
+  border-radius:5px;
+  font-size:16px;
+}
+.result{
+  margin-top:20px;
+  padding:15px;
+  background:#f7f7f7;
+  border-radius:8px;
+  display:none;
+}
+.fake{
+  color:red;
+  font-weight:bold;
+  text-align:center;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>List Pembagian THR</h2>
+<p>Tahun 2026</p>
+
+<label>NIK KTP</label>
+<input type="text" id="nik" placeholder="Masukkan NIK">
+
+<label>Pilih CV</label>
+<select id="cv">
+  <option value="">-- Pilih CV --</option>
+  <option>MHS</option>
+  <option>QMG</option>
+  <option>SPM</option>
+  <option>IJM</option>
+  <option>KDSA</option>
+  <option>LKP</option>
+</select>
+
+<button onclick="lihat()">Lihat THR</button>
+
+<div class="result" id="hasil">
+  <p><b>NIK:</b> <span id="oNik"></span></p>
+  <p><b>CV:</b> <span id="oCv"></span></p>
+  <p class="fake" id="oThr"></p>
+  <button onclick="buatPDF()">Download PDF</button>
+</div>
+</div>
+
+<script>
+let thrText = "";
+
+function lihat(){
+  const nik = document.getElementById('nik').value;
+  const cv  = document.getElementById('cv').value;
+
+  if(!nik || !cv){
+    alert("Lengkapi data dulu!");
+    return;
+  }
+
+  const prankTHR = [
+    "THR: Rp 0 (Belum memenuhi KPI)",
+    "THR: Rp 25.000 (dipotong absensi)",
+    "THR: Rp 50.000 (biaya administrasi)",
+    "THR berupa DOA & UCAPAN TERIMA KASIH",
+    "THR ditunda sampai waktu yang tidak ditentukan"
+  ];
+
+  thrText = prankTHR[Math.floor(Math.random()*prankTHR.length)];
+
+  document.getElementById('oNik').innerText = nik;
+  document.getElementById('oCv').innerText  = cv;
+  document.getElementById('oThr').innerText = thrText;
+  document.getElementById('hasil').style.display = "block";
+}
+
+function buatPDF(){
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
+
+  pdf.setFontSize(16);
+  pdf.text("BUKTI PEMBAGIAN THR 2026", 20, 20);
+
+  pdf.setFontSize(11);
+  pdf.text("NIK : " + document.getElementById('oNik').innerText, 20, 40);
+  pdf.text("CV  : " + document.getElementById('oCv').innerText, 20, 50);
+
+  pdf.setFontSize(14);
+  pdf.text(thrText, 20, 70);
+
+  pdf.setFontSize(10);
+  pdf.text("Catatan:", 20, 90);
+  pdf.text("- Keputusan mutlak manajemen", 20, 98);
+  pdf.text("- Tidak dapat diganggu gugat", 20, 106);
+  pdf.text("- Terima kasih atas dedikasi Anda", 20, 114);
+
+  pdf.text("HRD", 20, 140);
+  pdf.text("TTD: ____________________", 20, 150);
+
+  pdf.save("THR-2026.pdf");
+}
+</script>
+
+</body>
+</html>
