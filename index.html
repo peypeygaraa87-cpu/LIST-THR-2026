@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>List Pembagian THR 2026</title>
 
-<!-- jsPDF CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
@@ -57,10 +56,10 @@ button{
 <p>Tahun 2026</p>
 
 <label>NIK KTP</label>
-<input type="text" id="nik" placeholder="Masukkan NIK"
+<input type="text" id="nik" placeholder="Masukkan NIK">
 
 <label>Nama</label>
-<input type="text" placeholder="Masukan Nama">
+<input type="text" id="nama" placeholder="Masukkan Nama">
 
 <label>Pilih CV</label>
 <select id="cv">
@@ -75,9 +74,9 @@ button{
 
 <button onclick="lihat()">Lihat THR</button>
 
-<div class="result" id="hasil"
+<div class="result" id="hasil">
   <p><b>NIK:</b> <span id="oNik"></span></p>
-  <p><b>Nama</b> <span id="oNama"></span></p>
+  <p><b>Nama:</b> <span id="oNama"></span></p>
   <p><b>CV:</b> <span id="oCv"></span></p>
   <p class="fake" id="oThr"></p>
   <button onclick="buatPDF()">Download PDF</button>
@@ -88,26 +87,25 @@ button{
 let thrText = "";
 
 function lihat(){
-  const nama=
-    document.getElementbyid('nama').value;
-  const nik = 
-    document.getElementById('nik').value;
-  const cv  = 
-    document.getElementById('cv').value;
+  const nama = document.getElementById('nama').value;
+  const nik  = document.getElementById('nik').value;
+  const cv   = document.getElementById('cv').value;
 
-  if(!nama || nik || !cv){
+  if(!nama || !nik || !cv){
     alert("Lengkapi data dulu!");
     return;
   }
 
-  const prankTHR =
-    ["THR berupa DOA & UCAPAN TERIMA KASIH"];
+  const prankTHR = [
+    "THR berupa DOA & UCAPAN TERIMA KASIH"
+  ];
 
-  thrText = prankTHR[Math.floor(Math.random()*prankTHR.length)];
- document.getElementById('oNama').innerText = nama;
-  document.getElementById('oNik').innerText = nik;
-  document.getElementById('oCv').innerText  = cv;
-  document.getElementById('oThr').innerText = thrText;
+  thrText = prankTHR[0];
+
+  document.getElementById('oNama').innerText = nama;
+  document.getElementById('oNik').innerText  = nik;
+  document.getElementById('oCv').innerText   = cv;
+  document.getElementById('oThr').innerText  = thrText;
   document.getElementById('hasil').style.display = "block";
 }
 
@@ -120,20 +118,19 @@ function buatPDF(){
 
   pdf.setFontSize(11);
   pdf.text("Nama : " + document.getElementById('oNama').innerText, 20, 40);
-  pdf.text("NIK : " + document.getElementById('oNik').innerText, 20, 40);
-  pdf.text("CV  : " + document.getElementById('oCv').innerText, 20, 50);
+  pdf.text("NIK  : " + document.getElementById('oNik').innerText, 20, 50);
+  pdf.text("CV   : " + document.getElementById('oCv').innerText, 20, 60);
 
   pdf.setFontSize(14);
-  pdf.text(thrText, 20, 70);
+  pdf.text(thrText, 20, 80);
 
   pdf.setFontSize(10);
-  pdf.text("Catatan:", 20, 90);
-  pdf.text("- Keputusan mutlak manajemen", 20, 98);
-  pdf.text("- Tidak dapat diganggu gugat", 20, 106);
-  pdf.text("- Terima kasih atas dedikasi Anda", 20, 114);
+  pdf.text("Catatan:", 20, 100);
+  pdf.text("- Keputusan mutlak manajemen", 20, 108);
+  pdf.text("- Tidak dapat diganggu gugat", 20, 116);
 
   pdf.text("HRD", 20, 140);
-  pdf.text("TTD: ________wvstyxnc____________", 20, 150);
+  pdf.text("TTD: ____________________", 20, 150);
 
   pdf.save("THR-2026.pdf");
 }
