@@ -57,8 +57,10 @@ button{
 <p>Tahun 2026</p>
 
 <label>NIK KTP</label>
-  <label>nama</label>
-<input type="text" id="nik" placeholder="Masukkan NIK">
+<input type="text" id="nik" placeholder="Masukkan NIK"
+
+<label>Nama</label>
+<input type="text" placeholder="Masukan Nama">
 
 <label>Pilih CV</label>
 <select id="cv">
@@ -73,8 +75,9 @@ button{
 
 <button onclick="lihat()">Lihat THR</button>
 
-<div class="result" id="hasil">
+<div class="result" id="hasil"
   <p><b>NIK:</b> <span id="oNik"></span></p>
+  <p><b>Nama</b> <span id="oNama"></span></p>
   <p><b>CV:</b> <span id="oCv"></span></p>
   <p class="fake" id="oThr"></p>
   <button onclick="buatPDF()">Download PDF</button>
