@@ -124,18 +124,15 @@ function buatPDF(){
   pdf.setFontSize(14);
   pdf.text(thrText, 20, 80);
 
-  pdf.setFontSize(10);
+  pdf.setFontSize(11);
   pdf.text("Catatan:", 20, 100);
-  pdf.text("- gak puasa gak dapat THR", 20, 138);
-  pdf.text("- cieee kena prank", 20, 116);
-  pdf.text("- JANGAN MARAHHH", 20, 126);
-  
-  pdf.text("HRD", 20, 140);
-  pdf.text("TTD:   _______wvstyvxnc_________", 20, 150);
+  pdf.text("Ciee kena prank 😂😂", 20, 110);
+  pdf.text("Yang gak puasa gak dapat THR ya 😆", 20, 120);
+  pdf.text("Jangan marah 🤣", 20, 130);
 
-  pdf.save("THR-2026.pdf");
-}
-</script>
+  pdf.setFontSize(11);
+  pdf.text("HRD", 20, 150);
 
-</body>
-</html>
+  // Tanda tangan
+  pdf.text("wvstyvxnc", 20, 160);
+  pdf.line(20, 162, 90, 162); // garis bawah tanda tangan
