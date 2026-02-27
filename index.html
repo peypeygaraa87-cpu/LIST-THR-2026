@@ -57,6 +57,7 @@ button{
 <p>Tahun 2026</p>
 
 <label>NIK KTP</label>
+  <label>nama</label>
 <input type="text" id="nik" placeholder="Masukkan NIK">
 
 <label>Pilih CV</label>
@@ -84,24 +85,20 @@ button{
 let thrText = "";
 
 function lihat(){
+  const nama= document.getElementbyid('nama').value;
   const nik = document.getElementById('nik').value;
   const cv  = document.getElementById('cv').value;
 
-  if(!nik || !cv){
+  if(!nama || nik || !cv){
     alert("Lengkapi data dulu!");
     return;
   }
 
   const prankTHR = [
-    "THR: Rp 0 (Belum memenuhi KPI)",
-    "THR: Rp 25.000 (dipotong absensi)",
-    "THR: Rp 50.000 (biaya administrasi)",
-    "THR berupa DOA & UCAPAN TERIMA KASIH",
-    "THR ditunda sampai waktu yang tidak ditentukan"
-  ];
+    "THR berupa DOA & UCAPAN TERIMA KASIH"];
 
   thrText = prankTHR[Math.floor(Math.random()*prankTHR.length)];
-
+ document.getElementById('oNama').innerText = nama;
   document.getElementById('oNik').innerText = nik;
   document.getElementById('oCv').innerText  = cv;
   document.getElementById('oThr').innerText = thrText;
@@ -116,6 +113,7 @@ function buatPDF(){
   pdf.text("BUKTI PEMBAGIAN THR 2026", 20, 20);
 
   pdf.setFontSize(11);
+  pdf.text("Nama : " + document.getElementById('oNama').innerText, 20, 40);
   pdf.text("NIK : " + document.getElementById('oNik').innerText, 20, 40);
   pdf.text("CV  : " + document.getElementById('oCv').innerText, 20, 50);
 
@@ -129,7 +127,7 @@ function buatPDF(){
   pdf.text("- Terima kasih atas dedikasi Anda", 20, 114);
 
   pdf.text("HRD", 20, 140);
-  pdf.text("TTD: ____________________", 20, 150);
+  pdf.text("TTD: ________wvstyxnc____________", 20, 150);
 
   pdf.save("THR-2026.pdf");
 }
