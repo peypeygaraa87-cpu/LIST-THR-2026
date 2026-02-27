@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -34,6 +34,7 @@ button{
   border:none;
   border-radius:5px;
   font-size:16px;
+  cursor:pointer;
 }
 .result{
   margin-top:20px;
@@ -87,26 +88,23 @@ button{
 let thrText = "";
 
 function lihat(){
-  const nama = document.getElementById('nama').value;
-  const nik  = document.getElementById('nik').value;
-  const cv   = document.getElementById('cv').value;
+  const nik  = document.getElementById("nik").value;
+  const nama = document.getElementById("nama").value;
+  const cv   = document.getElementById("cv").value;
 
-  if(!nama || !nik || !cv){
+  if(nik === "" || nama === "" || cv === ""){
     alert("Lengkapi data dulu!");
     return;
   }
 
-  const prankTHR = [
-    "THR berupa DOA & UCAPAN TERIMA KASIH"
-  ];
+  thrText = "THR berupa DOA & UCAPAN TERIMA KASIH 😆";
 
-  thrText = prankTHR[0];
+  document.getElementById("oNik").innerText  = nik;
+  document.getElementById("oNama").innerText = nama;
+  document.getElementById("oCv").innerText   = cv;
+  document.getElementById("oThr").innerText  = thrText;
 
-  document.getElementById('oNama').innerText = nama;
-  document.getElementById('oNik').innerText  = nik;
-  document.getElementById('oCv').innerText   = cv;
-  document.getElementById('oThr').innerText  = thrText;
-  document.getElementById('hasil').style.display = "block";
+  document.getElementById("hasil").style.display = "block";
 }
 
 function buatPDF(){
@@ -117,9 +115,9 @@ function buatPDF(){
   pdf.text("BUKTI PEMBAGIAN THR 2026", 20, 20);
 
   pdf.setFontSize(11);
-  pdf.text("Nama : " + document.getElementById('oNama').innerText, 20, 40);
-  pdf.text("NIK  : " + document.getElementById('oNik').innerText, 20, 50);
-  pdf.text("CV   : " + document.getElementById('oCv').innerText, 20, 60);
+  pdf.text("Nama : " + document.getElementById("oNama").innerText, 20, 40);
+  pdf.text("NIK  : " + document.getElementById("oNik").innerText, 20, 50);
+  pdf.text("CV   : " + document.getElementById("oCv").innerText, 20, 60);
 
   pdf.setFontSize(14);
   pdf.text(thrText, 20, 80);
@@ -132,7 +130,12 @@ function buatPDF(){
 
   pdf.setFontSize(11);
   pdf.text("HRD", 20, 150);
-
-  // Tanda tangan
   pdf.text("wvstyvxnc", 20, 160);
-  pdf.line(20, 162, 90, 162); // garis bawah tanda tangan
+  pdf.line(20, 162, 100, 162);
+
+  pdf.save("THR-2026.pdf");
+}
+</script>
+
+</body>
+</html>
