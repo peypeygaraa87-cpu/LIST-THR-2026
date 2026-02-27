@@ -88,17 +88,20 @@ button{
 let thrText = "";
 
 function lihat(){
-  const nama= document.getElementbyid('nama').value;
-  const nik = document.getElementById('nik').value;
-  const cv  = document.getElementById('cv').value;
+  const nama=
+    document.getElementbyid('nama').value;
+  const nik = 
+    document.getElementById('nik').value;
+  const cv  = 
+    document.getElementById('cv').value;
 
   if(!nama || nik || !cv){
     alert("Lengkapi data dulu!");
     return;
   }
 
-  const prankTHR = [
-    "THR berupa DOA & UCAPAN TERIMA KASIH"];
+  const prankTHR =
+    ["THR berupa DOA & UCAPAN TERIMA KASIH"];
 
   thrText = prankTHR[Math.floor(Math.random()*prankTHR.length)];
  document.getElementById('oNama').innerText = nama;
